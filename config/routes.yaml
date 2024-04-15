@@ -3,3 +3,69 @@ controllers:
         path: ../src/Controller/
         namespace: App\Controller
     type: attribute
+
+app_discussion_show:
+    path: /discussion/{id}
+    controller: App\Controller\DiscussionController::show
+    requirements:
+        id: '\d+' 
+
+app_message_create:
+    path: '/message/create/{discussionId}'
+    controller: 'App\Controller\MessageController::create'
+
+
+app_discussion_list:
+    path: /discussions
+    controller: App\Controller\DiscussionController::list
+
+app_cours_list:
+    path: /cours
+    controller: App\Controller\CoursController::list
+
+
+logout:
+    path: '/logout'
+    controller: 'App\Controller\SecurityController::logout'
+
+profil:
+    path: /profil
+    controller: App\Controller\ProfilController::show
+
+programme_cours:
+    path: '/cours/{id}'
+    controller: 'App\Controller\CoursController@programmeCours'
+
+app_qcm_index:
+    path: /qcm
+    controller: App\Controller\QcmController::index
+
+app_q_c_m show:
+    path: /qcm/{id}
+    controller: App\Controller\QCMController::show
+    requirements:
+        id: \d+
+
+app_qcm_start:
+    path: /qcm/{id}/start
+    controller: App\Controller\QCMController::start
+    requirements:
+        id: '\d+'
+
+app_qcm_result:
+    path: /qcm/{id}/result
+    controller: App\Controller\QCMController::result
+    requirements:
+        id: '\d+'
+
+app_qcm_results:
+    path: '/qcm/{id}/results'
+    controller: 'App\Controller\QCMController::results'
+    methods: ['GET']
+
+
+
+
+
+
+

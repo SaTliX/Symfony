@@ -1,0 +1,23 @@
+<Cours class="mb-5">
+    <div class="row">
+        <div class="col-md-{{ leftCol }}">
+            {% if cours.featuredImage %}
+                <a href="{{ path('cours_show', { 'slug': cours.slug }) }}">
+                    <img src="/uploads/{{ cours.featuredImage.filename }}" alt="{{ cours.featuredImage.altText }}" loading="lazy" width="350" height="205" >
+                </a>
+            {% endif %}
+        </div>
+        <div class="col-md-{{ rightCol }}">
+            <h2 class="cours-title">
+                <a href="{{ path('cours_show', { 'slug': cours.slug }) }}" class="text-decoration-none">{{ cours.title }}</a>
+            </h2>
+            <p>
+                {{ cours.createdAt|date('d M Y') }} 
+                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                    / <a class="text-decoration-none" href="{{ path('cours_show', { 'slug': cours.slug }) }}#comments">Laisser un commentaire</a>
+                {% endif %}
+            </p>
+            {{ cours.featuredText ?: '' }}
+        </div>
+    </div>
+</cours>

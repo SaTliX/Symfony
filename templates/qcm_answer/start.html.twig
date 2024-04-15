@@ -1,0 +1,14 @@
+{# templates/qcm/start.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Start QCM{% endblock %}
+
+{% block body %}
+    <h1>Start QCM</h1>
+    <p>Welcome to the QCM. Answer the questions below:</p>
+    <form method="post">
+        {{ form(form) }}
+        <button type="submit">Next</button>
+    </form>
+{% endblock %}

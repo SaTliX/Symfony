@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des Discussions{% endblock %}
+
+{% block body %}
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Forums</h1>
+        <form class="d-flex justify-content-center" method="get" action="{{ path('app_discussion_search') }}">
+            <input class="form-control me-2" type="text" name="query" placeholder="Rechercher...">
+            <button class="btn btn-primary" type="submit">Rechercher</button>
+        </form>
+
+        <ul class="list-group mt-4">
+            {% for discussion in discussions %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <a href="{{ path('app_discussion_show', { 'id': discussion.id }) }}">{{ discussion.titre }}</a>
+                    <span class="badge bg-primary rounded-pill">{{ discussion.messages|length }}</span>
+                </li>
+            {% else %}
+                <li class="list-group-item">Aucune discussion disponible.</li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

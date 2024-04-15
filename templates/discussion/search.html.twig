@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Résultats de la recherche{% endblock %}
+
+{% block body %}
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Résultats de la recherche pour "{{ query }}"</h1>
+
+        {% if discussions|length > 0 %}
+            <ul class="list-group mb-5">
+                {% for discussion in discussions %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <a href="{{ path('app_discussion_show', {'id': discussion.id}) }}">{{ discussion.titre }}</a>
+                        <span class="badge bg-primary rounded-pill">{{ discussion.messages|length }}</span>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p class="text-center">Aucun résultat trouvé pour "{{ query }}"</p>
+        {% endif %}
+    </div>
+{% endblock %}

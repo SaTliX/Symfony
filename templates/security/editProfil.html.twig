@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profil de {{app.user.prenom}} {{app.user.nom }}{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        #edit-profil {
+            background-color: #f8f9fa;
+            padding: 30px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-action {
+            font-size: 16px;
+            padding: 10px 20px;
+        }
+
+        .form-control {
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <h1 class="text-primary text-black">Modifier mon profil</h1>
+
+    {% for message in app.flashes('notice') %}
+        <div class="alert alert-warning text-center mt-3">
+            {{ message }}
+            <i class="fa-solid fa-thumbs-up"></i>
+        </div>
+    {% endfor %}
+
+    <section id="edit-profil" class="py-5">
+        {{ form_start(form, {'attr' : {'class' : 'd-flex flex-column gap-3'}} ) }}
+        <h4 class="text-primary">Mes informations : </h4>
+
+        {{ form_row(form.email, {'label': 'Adresse mail :', 'attr' : {'class' : 'form-control' }} ) }}
+
+        {{ form_row(form.prenom, {'label': 'Prénom :', 'attr' : {'class' : 'form-control' }} ) }}
+        {{ form_row(form.nom, {'label': 'Nom :', 'attr' : {'class' : 'form-control' }} ) }}
+
+        <div class="d-flex justify-content-end">
+            <button class="btn btn-primary btn-action me-2" type="submit">Enregistrer la modification</button>
+            <a href="{{path('app_profil') }}" class="btn btn-secondary btn-action">Annuler</a>
+        </div>
+        {{ form_end(form)}}
+    </section>
+</div>
+{% endblock %}

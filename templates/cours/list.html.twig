@@ -1,0 +1,25 @@
+{% block body %}
+
+    {% for cours in cours %}
+        <div class="row mb-3">
+            <div class="col-md-{{ leftCol }}">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ cours.title|raw }}</h5>
+                        <p class="card-text">{{ cours.content|raw }}</p>
+                        <a href="{{ path('cours_show', {'slug': cours.slug}) }}" class="btn btn-primary">Voir détails</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-{{ rightCol }}">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Contenu de la colonne de droite</h5>
+                        <p class="card-text">Ce contenu est fictif et peut être remplacé par du contenu réel.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}
+

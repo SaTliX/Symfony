@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des Cours{% endblock %}
+{% block body %}
+
+<div class="row">
+    <div class="col">
+        <h1>{{ cours.title|raw   }}</h1>
+    </div>
+</div>
+
+<hr>
+
+<div class="row">
+    <div class="col">
+        <div id="cours-content" class="cours-content">
+            {{ cours.content|raw }}
+        </div>
+    </div>
+</div>
+
+{% if cours.pdfFilename %}
+<div class="row mt-4">
+    <div class="col">
+        <a href="{{ path('download_pdf', {'filename': cours.pdfFilename}) }}" class="btn btn-primary">Télécharger le PDF du cours</a>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

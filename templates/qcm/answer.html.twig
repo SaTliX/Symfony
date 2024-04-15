@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Répondre au QCM{% endblock %}
+
+{% block body %}
+    <h1>Répondre au QCM : {{ qcm.title }}</h1>
+
+    {% if qcm.description %}
+        <p>{{ qcm.description }}</p>
+    {% endif %}
+
+    <form method="POST" action="{{ path('app_qcm_answer', {'id': qcm.id}) }}">
+        {{ form_start(form) }}
+        {% for question in qcm.questions %}
+            <h3>Question {{ loop.index }}: {{ question.label }}</h3>
+
+            {% for answer in question.answers %}
+                <div>
+                    <input type="radio" id="answer_{{ answer.id }}" name="answersId[{{ loop.index0 }}]" value="{{ answer.id }}" required>
+                    <label for="answer_{{ answer.id }}">{{ answer.label }}</label>
+                </div>
+            {% endfor %}
+        {% endfor %}
+
+        <button type="submit">Soumettre les réponses</button>
+        {{ form_end(form) }}
+    </form>
+{% endblock %}

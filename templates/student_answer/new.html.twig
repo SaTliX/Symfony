@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New StudentAnswer{% endblock %}
+
+{% block body %}
+    <h1>Create new StudentAnswer</h1>
+
+    {{ include('student_answer/_form.html.twig') }}
+
+    <a href="{{ path('app_student_answer_index') }}">back to list</a>
+{% endblock %}

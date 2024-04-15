@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row justify-content-between mb-3">
+            <div class="col-auto">
+                <h1 class="my-4">Liste des QCM</h1>
+            </div>
+        {% if is_granted('ROLE_ADMIN') %}
+            <div class="col-auto">
+                <a href="{{ path('app_q_c_m_new') }}" class="btn btn-success">Add QCM</a>
+                <a href="{{ path('app_question_new') }}" class="btn btn-primary">Add Question</a>
+                <a href="{{ path('app_answers_new') }}" class="btn btn-info">Add Answer</a> {# Ajout du lien pour ajouter une réponse #}
+            </div>
+        {% endif %}
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                {% for q_c_m in q_c_ms %}
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ q_c_m.title }}</h5>
+                            <p class="card-text">
+                                {{ q_c_m.description }}<br>
+                                {{ q_c_m.Time ? q_c_m.Time|date('H:i') : '' }}<br>
+                            </p>
+                            <a href="{{ path('app_qcm_start', {'id': q_c_m.id}) }}" class="btn btn-primary">Commencer le QCM</a>
+                        </div>
+                    </div>
+                {% else %}
+                    <p>Aucun QCM disponible.</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des Cours{% endblock %}
+
+{% block body %}
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Liste des Cours</h1>
+
+    {% if cours is not empty %}
+        <div class="row">
+            {% for coursItem in cours %}
+                <div class="col-md-4 mb-3">
+                    <div class="card">
+                        <h4 class="card-header">{{ coursItem.title }}</h4>
+                        <div class="card-body">
+                            <p class="card-text">{{ coursItem.shortDescription|raw }}</p>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item d-flex justify-content-between">
+                                <a href="{{ path('programme_cours', {'id': coursItem.id}) }}" class="btn btn-secondary mr-2">Télécharger le programme</a>
+                                <a href="{{ path('cours_show', {'id': coursItem.id, 'slug': coursItem.slug}) }}" class="btn btn-primary">Voir le cours</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                {% if loop.index % 3 == 0 %}
+                    </div><div class="row">
+                {% endif %}
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="alert alert-info mt-3" role="alert">
+            Aucun cours disponible.
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

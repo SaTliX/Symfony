@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Résultats du QCM{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1 class="my-4">Résultats du QCM "{{ qcm.title }}"</h1>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Étudiant</th>
+                    <th scope="col">Question</th>
+                    <th scope="col">Réponse donnée</th>
+                    <th scope="col">Est Correcte</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for studentAnswer in studentAnswers %}
+                    <tr>
+                        <th scope="row">{{ loop.index }}</th>
+                        <td>{{ studentAnswer.getUserId().getUsername() }}</td>
+                        <td>{{ studentAnswer.getQuestionId().getLabel() }}</td>
+                        <td>{{ studentAnswer.getAnswersId().getLabel() }}</td>
+                        <td>{% if studentAnswer.getAnswersId().isIsTrue() %}Oui{% else %}Non{% endif %}</td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="5">Aucune réponse enregistrée pour ce QCM.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
